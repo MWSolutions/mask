@@ -2,10 +2,10 @@
 
 ## Description
 
-* Add a mask to a string
+- Add a mask to a string
 
 ## Usage
 
-``` bash
-npm i @mwsolutions/string-mask
+```bash
+npm i @mwsolutions/mask
 ```
