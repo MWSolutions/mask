@@ -44,7 +44,7 @@ export class MaskString {
   /**
    * @returns the original value
    */
-  get originalValue(): string {
+  get original(): string {
     return this._result.original;
   }
 

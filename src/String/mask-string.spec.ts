@@ -160,7 +160,7 @@ describe('new Maskstring', () => {
     expect(variable.value).toBe('abcd');
     expect(variable.hasErrors).toBe(false);
     expect(variable.isValid).toBe(true);
-    expect(variable.originalValue).toBe('abcd');
+    expect(variable.original).toBe('abcd');
     expect(variable.errors).toStrictEqual([]);
     expect(variable.prefix).toBeUndefined();
     expect(variable.suffix).toBeUndefined();
