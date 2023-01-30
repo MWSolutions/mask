@@ -11,5 +11,11 @@ export default defineConfig({
     },
     sourcemap: true,
   },
+  test: {
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text', 'json', 'html'],
+    },
+  },
   plugins: [dts()],
 });

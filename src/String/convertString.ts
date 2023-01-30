@@ -1,4 +1,4 @@
-import { OptionsString, ResultString, ResultValueString, MaskErrorString, TokenString, EscapeString } from './types';
+import { OptionsString, ResultString, MaskErrorString, TokenString, EscapeString, MaskStringErrorCodes } from './types';
 
 export function convertString(
   value: string,
@@ -16,7 +16,7 @@ export function convertString(
     '!': { escape: true },
   };
   const errors: MaskErrorString[] = [];
-  const resultValue: ResultValueString = { original: value, converted: '' };
+  const result: ResultString = { value: '', original: value, hasErrors: false, isValid: true, errors: errors };
 
   if (typeof extraMasks !== 'undefined') {
     Object.assign(tokens, extraMasks);
@@ -45,7 +45,7 @@ export function convertString(
           valueCounter++;
         } else {
           errors.push({
-            code: 'mws-sm-0001',
+            code: MaskStringErrorCodes.mws_ms_0001,
             description: 'Invalid value "' + valueChar + '" for mask "' + mask[maskCounter] + '"',
           });
           maskCounter = mask.length + 1;
@@ -61,20 +61,16 @@ export function convertString(
 
   if (options.prefix !== undefined) {
     converted = options.prefix + converted;
-    resultValue.prefix = options.prefix;
+    result.prefix = options.prefix;
   }
   if (options.suffix !== undefined) {
     converted = converted + options.suffix;
-    resultValue.suffix = options.suffix;
+    result.suffix = options.suffix;
   }
 
-  resultValue.original = value;
-  resultValue.converted = errors.length === 0 ? converted : '';
+  result.value = errors.length === 0 ? converted : '';
+  result.isValid = errors.length === 0 ? true : false;
+  result.hasErrors = errors.length === 0 ? false : true;
 
-  return {
-    value: resultValue,
-    errors,
-    hasErrors: errors.length > 0,
-    isValid: errors.length === 0,
-  };
+  return result;
 }

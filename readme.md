@@ -1,5 +1,5 @@
 # Mask
 
-## Description
+![GitHub package.json version](https://img.shields.io/github/package-json/v/mwsolutions/mask)
 
-- Add a mask to a string
+[Documentation on Github](https://github.com/MWSolutions/mask/tree/main/doc/MaskString.md)

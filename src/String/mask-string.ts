@@ -6,10 +6,11 @@ import { convertString } from './convertString';
  */
 export class MaskString {
   private _result: ResultString = {
-    value: { original: '', converted: '' },
+    value: '',
+    original: '',
     hasErrors: false,
     isValid: false,
-    errors: [{ code: '', description: '' }],
+    errors: [],
   };
 
   /**
@@ -27,10 +28,10 @@ export class MaskString {
   }
 
   /**
-   * @returns the input value
+   * @returns the converted value
    */
   get value(): string {
-    return this.result.value.original;
+    return this.result.value;
   }
 
   /**
@@ -41,10 +42,10 @@ export class MaskString {
   }
 
   /**
-   * @returns the converted value
+   * @returns the original value
    */
-  get convertedValue(): string {
-    return this._result.value.converted;
+  get originalValue(): string {
+    return this._result.original;
   }
 
   /**
@@ -73,6 +74,20 @@ export class MaskString {
    */
   get errors(): MaskErrorString[] {
     return this._result.errors;
+  }
+
+  /**
+   * @returns prefix
+   */
+  get prefix(): string | undefined {
+    return this._result.prefix;
+  }
+
+  /**
+   * @returns suffix
+   */
+  get suffix(): string | undefined {
+    return this._result.suffix;
   }
 
   private setValue(value: string) {

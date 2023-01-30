@@ -24,13 +24,14 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest --run --reporter verbose",
+    "test": "vitest --run --coverage --reporter verbose",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --config .prettierrc 'lib/**/*.ts' --write"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
+    "@vitest/coverage-istanbul": "^0.28.3",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",

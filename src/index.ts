@@ -3,8 +3,8 @@ export type {
   I18nString,
   OptionsString,
   MaskErrorString,
-  ResultValueString,
   ResultString,
   TokenString,
   EscapeString,
+  MaskStringErrorCodes,
 } from './String/types';

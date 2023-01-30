@@ -28,7 +28,7 @@ export type OptionsString = {
  * @param description - human readable error description
  */
 export type MaskErrorString = {
-  code: string;
+  code: MaskStringErrorCodes;
   description: string;
 };
 
@@ -46,18 +46,21 @@ export type ResultValueString = {
 };
 
 /**
- * @param value - See {@link ResultValueString} for details
+ * @param value - Converted input value, if there were errors converting the input value than this value contains an empty string
+ * @param original - Input value
  * @param hasErrors - true if there were errors converting the input string
  * @param isValid - true if converting the input string was a success
+ * @param prefix - Prefix is added in fromt of the the converted value (only if there were no errors converting the input value) (optional)
+ * @param suffix - Suffix is added at the end of the the converted value (only if there were no errors converting the input value) (optional)
  * @param errors - If there were errors converting the input string, this array contains the errors. See {@link MaskErrorString} for details
  */
 export type ResultString = {
-  /**
-   * @See {@link ResultValueString} for details
-   */
-  value: ResultValueString;
+  value: string;
+  original: string;
   hasErrors: boolean;
   isValid: boolean;
+  prefix?: string;
+  suffix?: string;
   /**
    * @See {@link MaskErrorString} for details
    */
@@ -79,3 +82,8 @@ export type TokenString = {
 export type EscapeString = {
   escape: boolean;
 };
+
+export enum MaskStringErrorCodes {
+  mws_ms_0000 = 'mws_ms_0000', // No Error
+  mws_ms_0001 = 'mws_ms_0001',
+}
