@@ -9,10 +9,10 @@ export function convertString(
     '#': { pattern: /\d/ },
     S: { pattern: /[a-zA-Z]/ },
     N: { pattern: /[0-9a-zA-Z]/ },
-    A: { pattern: /[a-zA-Z]/, transform: (v: string) => v.toLocaleUpperCase() },
-    a: { pattern: /[a-zA-Z]/, transform: (v: string) => v.toLocaleLowerCase() },
-    X: { pattern: /[0-9a-zA-Z]/, transform: (v: string) => v.toLocaleUpperCase() },
-    x: { pattern: /[0-9a-zA-Z]/, transform: (v: string) => v.toLocaleLowerCase() },
+    A: { pattern: /[a-zA-Z]/, transform: (v: string) => v.toUpperCase() },
+    a: { pattern: /[a-zA-Z]/, transform: (v: string) => v.toLowerCase() },
+    X: { pattern: /[0-9a-zA-Z]/, transform: (v: string) => v.toUpperCase() },
+    x: { pattern: /[0-9a-zA-Z]/, transform: (v: string) => v.toLowerCase() },
     '!': { escape: true },
   };
   const errors: MaskErrorString[] = [];
