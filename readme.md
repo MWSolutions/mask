@@ -34,8 +34,8 @@ variable.value = 'efgh'; // set a new value, console.log(variable.value) -> EFGH
 
 - possible options
 
-```json
-{
+```js
+options = {
     mask: string;
     prefix?: string;
     suffix?: string;
@@ -48,8 +48,8 @@ variable.value = 'efgh'; // set a new value, console.log(variable.value) -> EFGH
 
 - result (result of property result if variable, return value of method convertString)
 
-```json
-{
+```js
+options = {
     value: string;
     original: string;
     hasErrors: boolean;
@@ -62,3 +62,26 @@ variable.value = 'efgh'; // set a new value, console.log(variable.value) -> EFGH
     }];
   };
 ```
+
+### Available masks
+
+| Mask | available characters  | conversion |
+| ---- | --------------------- | ---------- |
+| #    | digit                 | none       |
+| S    | a-z, A-Z              | none       |
+| N    | a-z A-Z 0-9           | none       |
+| A    | a-z A-Z               | upercase   |
+| a    | a-z A-Z               | lowercase  |
+| X    | a-z A-Z 0-9           | upercase   |
+| x    | a-z A-Z 0-9           | lowercase  |
+| !    | escape next character | none       |
+
+#### Custom masks
+
+- it's possible to define your own masks
+
+```js
+const extraMask = { F: { pattern: /[0-9a-fA-F]/, transform: (v: string) => v.toLocaleUpperCase() } };
+```
+
+- Characters not listed in table (or defined as custom masks) are placed in the result of the conversion
