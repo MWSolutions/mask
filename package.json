@@ -1,6 +1,6 @@
 {
   "name": "@mwsolutions/mask",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Different variable types with a mask",
   "author": "Marc Willemsen",
   "license": "MIT",
@@ -29,6 +29,7 @@
     "prettier": "prettier --config .prettierrc 'lib/**/*.ts' --write"
   },
   "devDependencies": {
+    "@types/voca": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "@vitest/coverage-istanbul": "^0.28.3",
@@ -40,5 +41,8 @@
     "vite": "^3.2.3",
     "vite-plugin-dts": "^1.7.1",
     "vitest": "^0.25.3"
+  },
+  "dependencies": {
+    "voca": "^1.4.0"
   }
 }
