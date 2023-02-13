@@ -2,12 +2,12 @@ import { MaskString } from './mask-string';
 import { expect, it, describe } from 'vitest';
 import { OptionsString } from './types';
 
-describe('MaskString.convertString', () => {
+describe('MaskString.convert', () => {
   it('should return 1234', () => {
     const options: OptionsString = { mask: '####' };
     const value = '1234';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('1234');
     expect(result.hasErrors).toBe(false);
     expect(result.isValid).toBe(true);
@@ -17,7 +17,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'SSSS' };
     const value = 'abcd';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('abcd');
     expect(result.hasErrors).toBe(false);
     expect(result.isValid).toBe(true);
@@ -27,7 +27,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'NNNNNNN' };
     const value = '1234abc';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('1234abc');
     expect(result.hasErrors).toBe(false);
     expect(result.isValid).toBe(true);
@@ -37,7 +37,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'AAAA' };
     const value = 'abcd';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('ABCD');
     expect(result.hasErrors).toBe(false);
     expect(result.isValid).toBe(true);
@@ -47,7 +47,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'aaaa' };
     const value = 'ABCD';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('abcd');
     expect(result.isValid).toBe(true);
     expect(result.hasErrors).toBe(false);
@@ -57,7 +57,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'XXXXXXX' };
     const value = 'abcd123';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('ABCD123');
     expect(result.hasErrors).toBe(false);
     expect(result.isValid).toBe(true);
@@ -67,7 +67,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'xxxxxxx' };
     const value = 'ABCD123';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('abcd123');
     expect(result.isValid).toBe(true);
     expect(result.hasErrors).toBe(false);
@@ -77,7 +77,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: '!a!A!x!Xaaaa' };
     const value = 'ABCD';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
     expect(result.value).toBe('aAxXabcd');
     expect(result.isValid).toBe(true);
     expect(result.hasErrors).toBe(false);
@@ -88,7 +88,7 @@ describe('MaskString.convertString', () => {
     const value = '0faf';
     const extraMask = { F: { pattern: /[0-9a-fA-F]/, transform: (v: string) => v.toLocaleUpperCase() } };
 
-    const result = MaskString.convertString(value, options, extraMask);
+    const result = MaskString.convert(value, options, extraMask);
 
     expect(result.value).toBe('0FAF');
     expect(result.isValid).toBe(true);
@@ -99,7 +99,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'bbSSSS' };
     const value = 'abcd';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
 
     expect(result.value).toBe('bbabcd');
     expect(result.isValid).toBe(true);
@@ -110,7 +110,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'SSSS', prefix: 'prefix_' };
     const value = 'abcd';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
 
     expect(result.value).toBe('prefix_abcd');
     expect(result.isValid).toBe(true);
@@ -121,7 +121,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'SSSS', suffix: '_suffix' };
     const value = 'abcd';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
 
     expect(result.value).toBe('abcd_suffix');
     expect(result.isValid).toBe(true);
@@ -132,7 +132,7 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'SSSS' };
     const value = 'abcdef';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
 
     expect(result.value).toBe('abcd');
     expect(result.isValid).toBe(true);
@@ -143,11 +143,23 @@ describe('MaskString.convertString', () => {
     const options: OptionsString = { mask: 'SSSS' };
     const value = '1234';
 
-    const result = MaskString.convertString(value, options);
+    const result = MaskString.convert(value, options);
 
     expect(result.value).toBe('');
     expect(result.isValid).toBe(false);
     expect(result.hasErrors).toBe(true);
+  });
+
+  // deprecated
+  it('should return abcd', () => {
+    const options: OptionsString = { mask: 'SSSS' };
+    const value = 'abcdef';
+
+    const result = MaskString.convertString(value, options);
+
+    expect(result.value).toBe('abcd');
+    expect(result.isValid).toBe(true);
+    expect(result.hasErrors).toBe(false);
   });
 });
 

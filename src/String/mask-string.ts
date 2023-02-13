@@ -91,10 +91,24 @@ export class MaskString {
   }
 
   private setValue(value: string) {
-    this._result = MaskString.convertString(value, this.options, this.extraMasks);
+    this._result = MaskString.convert(value, this.options, this.extraMasks);
   }
 
   /**
+   * @param value - value that must be converted with a mask (options.mask).
+   * @param options - options contains different options for the conversion (eg. the mask, see OptionsString type for all options)
+   * @returns See ResultString type for available data
+   */
+  static convert(
+    value: string,
+    options: OptionsString,
+    extraMasks: Record<string, TokenString | EscapeString> | undefined = undefined,
+  ): ResultString {
+    return convertString(value, options, extraMasks);
+  }
+
+  /**
+   * @deprecated use convert instead
    * @param value - value that must be converted with a mask (options.mask).
    * @param options - options contains different options for the conversion (eg. the mask, see OptionsString type for all options)
    * @returns See ResultString type for available data

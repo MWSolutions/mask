@@ -1,13 +1,4 @@
 /**
- * @param decimalSign - Character that must be used as decimal sign
- * @param thousandSeparator - Character that must be used as thousand separator
- */
-export type I18nString = {
-  decimalSign: string;
-  thousandSeparator: string;
-};
-
-/**
  * @param mask - Character that must be used as decimal sign
  * @param prefix - Character that must be used as thousand separator (optional)
  * @param suffix - Character that must be used as thousand separator (optional)
@@ -17,10 +8,6 @@ export type OptionsString = {
   mask: string;
   prefix?: string;
   suffix?: string;
-  /**
-   * @See {@link i18n} for details (optional)
-   */
-  i18n?: I18nString;
 };
 
 /**
@@ -30,19 +17,6 @@ export type OptionsString = {
 export type MaskErrorString = {
   code: MaskStringErrorCodes;
   description: string;
-};
-
-/**
- * @param original - Input value
- * @param converted - Converted input value, if there were errors converting the input value than this value contains an empty string
- * @param prefix - Prefix is added in fromt of the the converted value (only if there were no errors converting the input value) (optional)
- * @param suffix - Suffix is added at the end of the the converted value (only if there were no errors converting the input value) (optional)
- */
-export type ResultValueString = {
-  original: string;
-  converted: string;
-  prefix?: string;
-  suffix?: string;
 };
 
 /**
